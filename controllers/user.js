@@ -8,10 +8,7 @@ async function signupUser(req,res){
             email,
             password
         })
-        return res.status(201).json({
-            message:"User signed up successfully",
-            user
-        });
+        return res.render('signin');
     }catch(err){
         console.log(err);
         return res.render('signup');
@@ -20,6 +17,15 @@ async function signupUser(req,res){
 
 async function signinUser(req,res){
     const {email,password}=req.body;
+    try{
+        const user= await USERS.matchPassword(email,password)
+    console.log(user)
+    res.redirect('/')
+    }
+    catch(error){
+        res.render('signin',{error:"Password or email not found"})
+    }
+    
 }
 
 module.exports={
