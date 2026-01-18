@@ -2,6 +2,8 @@ const path=require('path')
 const express=require('express');
 const mongoose=require('mongoose');
 const userRouter=require('./routes/user')
+const{checkForAuthenticationCookie}=require('./middlewares/authentication')
+const cookieParser=require('cookie-parser')
 
 mongoose.connect('mongodb://localhost:27017/Beelog')
 .then(()=>{
@@ -15,9 +17,12 @@ const app=express();
 const PORT=67
 
 app.use(express.urlencoded({extended:'false'}))
+app.use(cookieParser())
 
 app.set('view engine','ejs');
 app.set('views',path.resolve('./views'))
+
+app.use(checkForAuthenticationCookie('token'));
 
 app.get('/',(req,res)=>{
     res.render('home')

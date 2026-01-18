@@ -18,12 +18,12 @@ async function signupUser(req,res){
 async function signinUser(req,res){
     const {email,password}=req.body;
     try{
-        const user= await USERS.matchPassword(email,password)
-    console.log(user)
-    res.redirect('/')
+        const token= await USERS.matchPasswordandGenerateToken(email,password)
+        console.log(token)
+        res.redirect('/')
     }
     catch(error){
-        res.render('signin',{error:"Password or email not found"})
+        res.render('signin',{error:"Email or password not found"})
     }
     
 }
