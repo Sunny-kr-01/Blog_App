@@ -20,7 +20,7 @@ async function signinUser(req,res){
     try{
         const token= await USERS.matchPasswordandGenerateToken(email,password)
         console.log(token)
-        res.redirect('/')
+        return res.cookie('token',token).redirect('/')
     }
     catch(error){
         res.render('signin',{error:"Email or password not found"})

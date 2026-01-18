@@ -25,7 +25,9 @@ app.set('views',path.resolve('./views'))
 app.use(checkForAuthenticationCookie('token'));
 
 app.get('/',(req,res)=>{
-    res.render('home')
+    res.render('home',{
+        user:req.user,
+    })
 })
 
 app.use('/user',userRouter)

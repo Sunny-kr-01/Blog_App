@@ -1,6 +1,5 @@
 const jwt=require('jsonwebtoken');
 const secret='Thunder@!$&';
-const User=require('../models/user');
 
 async function generateToken(user){
     const payload={

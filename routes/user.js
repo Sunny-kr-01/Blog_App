@@ -11,5 +11,8 @@ router.get('/signin',(req,res)=>{
 })
 router.post('/signin',signinUser)
 router.post('/signup',signupUser)
+router.get('/logout',(req,res)=>{
+    res.clearCookie('token').redirect('/')
+})
 
 module.exports= router;

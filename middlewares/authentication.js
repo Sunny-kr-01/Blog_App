@@ -2,7 +2,7 @@ const { verifyToken } = require("../services/authentication");
 
 
 function checkForAuthenticationCookie(cookieName){
-    return function(req,res,next){
+    return async function(req,res,next){
         const tokenCookieValue=req.cookies[cookieName]
         
         if(!tokenCookieValue){
@@ -10,7 +10,7 @@ function checkForAuthenticationCookie(cookieName){
         }
 
         try {
-            const payload=verifyToken(tokenCookieValue);
+            const payload=await verifyToken(tokenCookieValue);
             req.user=payload;
         } catch (error) {
             
