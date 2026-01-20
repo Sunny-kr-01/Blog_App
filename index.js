@@ -2,6 +2,7 @@ const path=require('path')
 const express=require('express');
 const mongoose=require('mongoose');
 const userRouter=require('./routes/user')
+const blogRouter=require('./routes/blog')
 const{checkForAuthenticationCookie}=require('./middlewares/authentication')
 const cookieParser=require('cookie-parser')
 
@@ -29,8 +30,15 @@ app.get('/',(req,res)=>{
         user:req.user,
     })
 })
+app.get('/about',(req,res)=>{
+    res.render('about',{
+        user:req.user,
+    })
+})
+
 
 app.use('/user',userRouter)
+app.use('/blog',blogRouter)
 
 app.listen(PORT,()=>{
     console.log(`Server started at port ${PORT} at http://localhost:67`)

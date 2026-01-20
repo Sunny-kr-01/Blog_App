@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>Create Blog</title>
+  
+  <style>
+    .blog-form-container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .blog-form-container h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .blog-form-container input,
+    .blog-form-container textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
+
+    .blog-form-container textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    .blog-form-container button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #1f73ff;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .blog-form-container button:hover {
+      background: #0b5ce0;
+    }
+
+    .file-input {
+      margin-bottom: 20px;
+    }
+
+    .tag-box {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag-box input {
+      width: auto;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('./partials/nav') %>
+
+  <div class="blog-form-container">
+    <h2>Create a New Blog Post</h2>
+
+    <form action="/blog/new" method="POST" enctype="multipart/form-data">
+      
+      <input type="text" name="title" placeholder="Enter blog title" required>
+
+      <textarea name="content" placeholder="Write your content..." required></textarea>
+
+      <div class="tag-box">
+        <input type="text" name="tags" placeholder="Tags (comma separated)">
+      </div>
+
+      <div class="file-input">
+        <label>Cover Image</label>
+        <input type="file" name="image">
+      </div>
+
+      <button type="submit">Publish</button>
+    </form>
+  </div>
+
+  <%- include('./partials/scripts') %>
+</body>
+</html>

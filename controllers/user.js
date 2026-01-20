@@ -19,7 +19,6 @@ async function signinUser(req,res){
     const {email,password}=req.body;
     try{
         const token= await USERS.matchPasswordandGenerateToken(email,password)
-        console.log(token)
         return res.cookie('token',token).redirect('/')
     }
     catch(error){
