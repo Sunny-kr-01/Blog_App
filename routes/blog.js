@@ -23,6 +23,6 @@ router.get('/new',(req,res)=>{
         user:req.user
     })
 });
-router.post('/new',upload.single('image'),addNewBlog);
+router.post('/new',upload.single('coverImage'),addNewBlog);
 
 module.exports=router;
