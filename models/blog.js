@@ -16,7 +16,7 @@ const blogSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"users"
     }
-},{timestsmps:true})
+},{timestamps:true})
 
 const BLOGS=mongoose.model('blogs',blogSchema);
 
