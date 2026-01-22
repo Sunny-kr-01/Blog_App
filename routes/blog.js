@@ -2,7 +2,6 @@ const { Router } = require('express')
 const multer=require('multer')
 const path =require('path')
 const BLOGS=require('../models/blog')
-const USERS=require('../models/user')
 const {addNewBlog}=require('../controllers/blog')
 
 const router=new Router();
@@ -27,13 +26,11 @@ router.get('/new',(req,res)=>{
 router.post('/new',upload.single('coverImage'),addNewBlog);
 
 router.get('/:id',async(req,res)=>{
-  const blog = await BLOGS.findById(req.params.id);
-  const oozer = await USERS.findById(blog.createdBy);
-  const author=oozer.fullName
+  const blog = await BLOGS.findById(req.params.id).populate('createdBy');
+  console.log(blog)
   res.render('showBlogs',{
     user: req.user,
     blog,
-    author
   })
 })
 
