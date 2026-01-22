@@ -1,4 +1,5 @@
 const BLOGS=require('../models/blog')
+const COMMENTS=require('../models/comment')
 const path= require('path')
 
 async function addNewBlog(req,res){
@@ -12,6 +13,17 @@ async function addNewBlog(req,res){
     res.redirect(`/blog/${blog._id}`)
 }
 
+async function addComment(req,res){
+    await COMMENTS.create({
+        blog:req.params.blog_id,
+        user:req.user._id,
+        content:req.body.content
+    })
+    res.redirect(`/blog/${req.params.blog_id}`)
+  
+}
+
 module.exports={
-    addNewBlog
+    addNewBlog,
+    addComment
 }

@@ -54,6 +54,58 @@
 
         </div>
 
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Comments</h5>
+
+                <% if (comments.length===0) { %>
+                    <p class="text-muted">No comments yet. Be the first!</p>
+                    <% } %>
+
+                        <% comments.forEach(c=> { %>
+                            <div class="d-flex gap-2 mb-3">
+
+                                <img src="<%= c.user.profileImageURL %>" width="36" height="36" class="rounded-circle"
+                                    style="object-fit: cover;">
+
+                                <div class="flex-grow-1">
+                                    <div>
+                                        <strong>
+                                            <%= c.user.fullName %>
+                                        </strong>
+                                        <small class="text-muted ms-1">
+                                            <%= c.createdAt.toLocaleDateString('en-us', { month:"short", day:"numeric",
+                                                year:"numeric" }) %>
+                                        </small>
+                                    </div>
+                                    <div>
+                                        <%= c.content %>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <% }) %>
+            </div>
+        </div>
+
+
+        <% if (locals.user) { %>
+         <div class="row justify-content-center mt-3">
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <form method="POST" action="/blog/comment/<%= blog._id %>">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="content" placeholder="Write a comment..."
+                            required>
+                        <button class="btn btn-primary btn-sm">Post</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <% } %>
+
+
         <%- include('./partials/scripts') %>
 </body>
 
